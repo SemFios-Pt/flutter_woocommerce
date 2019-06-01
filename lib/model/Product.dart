@@ -1,7 +1,8 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
-import 'package:flutter_woocommerce/model/Link.dart';
+import 'package:flutter_woocommerce/model/util/Link.dart';
+import 'package:flutter_woocommerce/model/util/MetaData.dart';
 
 part 'Product.g.dart';
 
@@ -254,18 +255,4 @@ abstract class Tag implements Built<Tag, TagBuilder> {
   Tag._();
 
   factory Tag([updates(TagBuilder b)]) = _$Tag;
-}
-
-abstract class MetaData implements Built<MetaData, MetaDataBuilder> {
-  static Serializer<MetaData> get serializer => _$metaDataSerializer;
-
-  int get id;
-
-  String get key;
-
-  String get value;
-
-  MetaData._();
-
-  factory MetaData([updates(MetaDataBuilder b)]) = _$MetaData;
 }

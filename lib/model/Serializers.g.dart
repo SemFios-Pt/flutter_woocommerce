@@ -7,6 +7,7 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Billing.serializer)
       ..add(Category.serializer)
       ..add(Dimensions.serializer)
       ..add(Href.serializer)
@@ -14,6 +15,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Link.serializer)
       ..add(MetaData.serializer)
       ..add(Product.serializer)
+      ..add(Shipping.serializer)
       ..add(Tag.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Href)]),

@@ -1,11 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:convert';
-import 'package:mockito/mockito.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_woocommerce/test_strings.dart';
 import 'package:flutter_woocommerce/model/Serializers.dart';
 import 'package:flutter_woocommerce/model/Product.dart';
-import 'package:flutter_woocommerce/model/Link.dart';
+import 'package:flutter_woocommerce/model/util/Link.dart';
 
 void main() {
 
