@@ -3,6 +3,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_woocommerce/model/util/Link.dart';
 import 'package:flutter_woocommerce/model/util/MetaData.dart';
+import 'package:flutter_woocommerce/model/util/Billing.dart';
+import 'package:flutter_woocommerce/model/util/Shipping.dart';
 
 part 'Customer.g.dart';
 
@@ -11,15 +13,17 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
 
   int get id;
 
-    @BuiltValueField(wireName: 'date_created')
+  @BuiltValueField(wireName: 'date_created')
   String get dateCreated;
 
   @BuiltValueField(wireName: 'date_created_gmt')
   String get dateCreatedGmt;
 
+  @nullable
   @BuiltValueField(wireName: 'date_modified')
   String get dateModified;
 
+  @nullable
   @BuiltValueField(wireName: 'date_modified_gmt')
   String get dateModifiedGmt;
 
@@ -35,13 +39,17 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
 
   String get username;
 
+  Billing get billing;
+
+  Shipping get shipping;
+
   @BuiltValueField(wireName: 'is_paying_customer')
   bool get isPayingCustomer;
 
   @BuiltValueField(wireName: 'orders_count')
   int get ordersCount;
 
-  @BuiltValueField(wireName: 'total_spend')
+  @BuiltValueField(wireName: 'total_spent')
   String get totalSpent;
 
   @BuiltValueField(wireName: 'avatar_url')

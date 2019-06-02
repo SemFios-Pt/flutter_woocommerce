@@ -59,4 +59,8 @@ class TestStrings {
       ]
     }
   ''';
+
+  static const String CUSTOMER_JSON = r'''
+    {"id":2,"date_created":"2019-06-01T14:29:03","date_created_gmt":"2019-06-01T14:29:03","date_modified":null,"date_modified_gmt":null,"email":"dummy@gmail.com","first_name":"sagar","last_name":"rai","role":"customer","username":"dummy","billing":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","postcode":"","country":"","state":"","email":"","phone":""},"shipping":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","postcode":"","country":"","state":""},"is_paying_customer":false,"orders_count":0,"total_spent":"0.00","avatar_url":"http:\/\/1.gravatar.com\/avatar\/d997020ebc85538140cc01d69c6127a5?s=96&d=mm&r=g","meta_data":[],"_links":{"self":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/customers\/2"}],"collection":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/customers"}]}}
+  ''';
 }

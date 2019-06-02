@@ -26,12 +26,6 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
       'date_created_gmt',
       serializers.serialize(object.dateCreatedGmt,
           specifiedType: const FullType(String)),
-      'date_modified',
-      serializers.serialize(object.dateModified,
-          specifiedType: const FullType(String)),
-      'date_modified_gmt',
-      serializers.serialize(object.dateModifiedGmt,
-          specifiedType: const FullType(String)),
       'email',
       serializers.serialize(object.email,
           specifiedType: const FullType(String)),
@@ -46,13 +40,19 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
       'username',
       serializers.serialize(object.username,
           specifiedType: const FullType(String)),
+      'billing',
+      serializers.serialize(object.billing,
+          specifiedType: const FullType(Billing)),
+      'shipping',
+      serializers.serialize(object.shipping,
+          specifiedType: const FullType(Shipping)),
       'is_paying_customer',
       serializers.serialize(object.isPayingCustomer,
           specifiedType: const FullType(bool)),
       'orders_count',
       serializers.serialize(object.ordersCount,
           specifiedType: const FullType(int)),
-      'total_spend',
+      'total_spent',
       serializers.serialize(object.totalSpent,
           specifiedType: const FullType(String)),
       'avatar_url',
@@ -65,7 +65,18 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
       '_links',
       serializers.serialize(object.links, specifiedType: const FullType(Link)),
     ];
-
+    if (object.dateModified != null) {
+      result
+        ..add('date_modified')
+        ..add(serializers.serialize(object.dateModified,
+            specifiedType: const FullType(String)));
+    }
+    if (object.dateModifiedGmt != null) {
+      result
+        ..add('date_modified_gmt')
+        ..add(serializers.serialize(object.dateModifiedGmt,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -120,6 +131,14 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           result.username = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'billing':
+          result.billing.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Billing)) as Billing);
+          break;
+        case 'shipping':
+          result.shipping.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Shipping)) as Shipping);
+          break;
         case 'is_paying_customer':
           result.isPayingCustomer = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
@@ -128,7 +147,7 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           result.ordersCount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'total_spend':
+        case 'total_spent':
           result.totalSpent = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
@@ -174,6 +193,10 @@ class _$Customer extends Customer {
   @override
   final String username;
   @override
+  final Billing billing;
+  @override
+  final Shipping shipping;
+  @override
   final bool isPayingCustomer;
   @override
   final int ordersCount;
@@ -200,6 +223,8 @@ class _$Customer extends Customer {
       this.lastName,
       this.role,
       this.username,
+      this.billing,
+      this.shipping,
       this.isPayingCustomer,
       this.ordersCount,
       this.totalSpent,
@@ -216,12 +241,6 @@ class _$Customer extends Customer {
     if (dateCreatedGmt == null) {
       throw new BuiltValueNullFieldError('Customer', 'dateCreatedGmt');
     }
-    if (dateModified == null) {
-      throw new BuiltValueNullFieldError('Customer', 'dateModified');
-    }
-    if (dateModifiedGmt == null) {
-      throw new BuiltValueNullFieldError('Customer', 'dateModifiedGmt');
-    }
     if (email == null) {
       throw new BuiltValueNullFieldError('Customer', 'email');
     }
@@ -236,6 +255,12 @@ class _$Customer extends Customer {
     }
     if (username == null) {
       throw new BuiltValueNullFieldError('Customer', 'username');
+    }
+    if (billing == null) {
+      throw new BuiltValueNullFieldError('Customer', 'billing');
+    }
+    if (shipping == null) {
+      throw new BuiltValueNullFieldError('Customer', 'shipping');
     }
     if (isPayingCustomer == null) {
       throw new BuiltValueNullFieldError('Customer', 'isPayingCustomer');
@@ -278,6 +303,8 @@ class _$Customer extends Customer {
         lastName == other.lastName &&
         role == other.role &&
         username == other.username &&
+        billing == other.billing &&
+        shipping == other.shipping &&
         isPayingCustomer == other.isPayingCustomer &&
         ordersCount == other.ordersCount &&
         totalSpent == other.totalSpent &&
@@ -304,20 +331,26 @@ class _$Customer extends Customer {
                                                         $jc(
                                                             $jc(
                                                                 $jc(
-                                                                    0,
-                                                                    id
+                                                                    $jc(
+                                                                        $jc(
+                                                                            0,
+                                                                            id
+                                                                                .hashCode),
+                                                                        dateCreated
+                                                                            .hashCode),
+                                                                    dateCreatedGmt
                                                                         .hashCode),
-                                                                dateCreated
+                                                                dateModified
                                                                     .hashCode),
-                                                            dateCreatedGmt
+                                                            dateModifiedGmt
                                                                 .hashCode),
-                                                        dateModified.hashCode),
-                                                    dateModifiedGmt.hashCode),
-                                                email.hashCode),
-                                            firstName.hashCode),
-                                        lastName.hashCode),
-                                    role.hashCode),
-                                username.hashCode),
+                                                        email.hashCode),
+                                                    firstName.hashCode),
+                                                lastName.hashCode),
+                                            role.hashCode),
+                                        username.hashCode),
+                                    billing.hashCode),
+                                shipping.hashCode),
                             isPayingCustomer.hashCode),
                         ordersCount.hashCode),
                     totalSpent.hashCode),
@@ -339,6 +372,8 @@ class _$Customer extends Customer {
           ..add('lastName', lastName)
           ..add('role', role)
           ..add('username', username)
+          ..add('billing', billing)
+          ..add('shipping', shipping)
           ..add('isPayingCustomer', isPayingCustomer)
           ..add('ordersCount', ordersCount)
           ..add('totalSpent', totalSpent)
@@ -394,6 +429,14 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
   String get username => _$this._username;
   set username(String username) => _$this._username = username;
 
+  BillingBuilder _billing;
+  BillingBuilder get billing => _$this._billing ??= new BillingBuilder();
+  set billing(BillingBuilder billing) => _$this._billing = billing;
+
+  ShippingBuilder _shipping;
+  ShippingBuilder get shipping => _$this._shipping ??= new ShippingBuilder();
+  set shipping(ShippingBuilder shipping) => _$this._shipping = shipping;
+
   bool _isPayingCustomer;
   bool get isPayingCustomer => _$this._isPayingCustomer;
   set isPayingCustomer(bool isPayingCustomer) =>
@@ -434,6 +477,8 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
       _lastName = _$v.lastName;
       _role = _$v.role;
       _username = _$v.username;
+      _billing = _$v.billing?.toBuilder();
+      _shipping = _$v.shipping?.toBuilder();
       _isPayingCustomer = _$v.isPayingCustomer;
       _ordersCount = _$v.ordersCount;
       _totalSpent = _$v.totalSpent;
@@ -474,6 +519,8 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
               lastName: lastName,
               role: role,
               username: username,
+              billing: billing.build(),
+              shipping: shipping.build(),
               isPayingCustomer: isPayingCustomer,
               ordersCount: ordersCount,
               totalSpent: totalSpent,
@@ -483,6 +530,11 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'billing';
+        billing.build();
+        _$failedField = 'shipping';
+        shipping.build();
+
         _$failedField = 'metaData';
         metaData.build();
         _$failedField = 'links';
