@@ -37,8 +37,8 @@ void main() {
     expect(billing.postcode, '');
   });
   
-  test('first_name is empty', () {
-    expect(billing.firstName, '');
+  test('country is empty', () {
+    expect(billing.country, '');
   });
 
   test('state is empty', () {

@@ -37,12 +37,6 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
       'date_created_gmt',
       serializers.serialize(object.dateCreatedGmt,
           specifiedType: const FullType(String)),
-      'date_modified',
-      serializers.serialize(object.dateModified,
-          specifiedType: const FullType(String)),
-      'date_modified_gmt',
-      serializers.serialize(object.dateModifiedGmt,
-          specifiedType: const FullType(String)),
       'type',
       serializers.serialize(object.type, specifiedType: const FullType(String)),
       'status',
@@ -191,6 +185,18 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
       '_links',
       serializers.serialize(object.links, specifiedType: const FullType(Link)),
     ];
+    if (object.dateModified != null) {
+      result
+        ..add('date_modified')
+        ..add(serializers.serialize(object.dateModified,
+            specifiedType: const FullType(String)));
+    }
+    if (object.dateModifiedGmt != null) {
+      result
+        ..add('date_modified_gmt')
+        ..add(serializers.serialize(object.dateModifiedGmt,
+            specifiedType: const FullType(String)));
+    }
     if (object.dateOnSaleFrom != null) {
       result
         ..add('date_on_sale_from')
@@ -953,12 +959,6 @@ class _$Product extends Product {
     }
     if (dateCreatedGmt == null) {
       throw new BuiltValueNullFieldError('Product', 'dateCreatedGmt');
-    }
-    if (dateModified == null) {
-      throw new BuiltValueNullFieldError('Product', 'dateModified');
-    }
-    if (dateModifiedGmt == null) {
-      throw new BuiltValueNullFieldError('Product', 'dateModifiedGmt');
     }
     if (type == null) {
       throw new BuiltValueNullFieldError('Product', 'type');

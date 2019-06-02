@@ -23,9 +23,11 @@ abstract class Product implements Built<Product, ProductBuilder> {
   @BuiltValueField(wireName: 'date_created_gmt')
   String get dateCreatedGmt;
 
+  @nullable
   @BuiltValueField(wireName: 'date_modified')
   String get dateModified;
 
+  @nullable
   @BuiltValueField(wireName: 'date_modified_gmt')
   String get dateModifiedGmt;
 

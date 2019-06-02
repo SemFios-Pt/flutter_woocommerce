@@ -35,6 +35,9 @@ class _$BillingSerializer implements StructuredSerializer<Billing> {
           specifiedType: const FullType(String)),
       'city',
       serializers.serialize(object.city, specifiedType: const FullType(String)),
+      'country',
+      serializers.serialize(object.country,
+          specifiedType: const FullType(String)),
       'postcode',
       serializers.serialize(object.postcode,
           specifiedType: const FullType(String)),
@@ -87,6 +90,10 @@ class _$BillingSerializer implements StructuredSerializer<Billing> {
           result.city = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'country':
+          result.country = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'postcode':
           result.postcode = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -124,6 +131,8 @@ class _$Billing extends Billing {
   @override
   final String city;
   @override
+  final String country;
+  @override
   final String postcode;
   @override
   final String state;
@@ -142,6 +151,7 @@ class _$Billing extends Billing {
       this.address1,
       this.address2,
       this.city,
+      this.country,
       this.postcode,
       this.state,
       this.email,
@@ -164,6 +174,9 @@ class _$Billing extends Billing {
     }
     if (city == null) {
       throw new BuiltValueNullFieldError('Billing', 'city');
+    }
+    if (country == null) {
+      throw new BuiltValueNullFieldError('Billing', 'country');
     }
     if (postcode == null) {
       throw new BuiltValueNullFieldError('Billing', 'postcode');
@@ -196,6 +209,7 @@ class _$Billing extends Billing {
         address1 == other.address1 &&
         address2 == other.address2 &&
         city == other.city &&
+        country == other.country &&
         postcode == other.postcode &&
         state == other.state &&
         email == other.email &&
@@ -212,12 +226,14 @@ class _$Billing extends Billing {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, firstName.hashCode),
-                                        lastName.hashCode),
-                                    company.hashCode),
-                                address1.hashCode),
-                            address2.hashCode),
-                        city.hashCode),
+                                    $jc(
+                                        $jc($jc(0, firstName.hashCode),
+                                            lastName.hashCode),
+                                        company.hashCode),
+                                    address1.hashCode),
+                                address2.hashCode),
+                            city.hashCode),
+                        country.hashCode),
                     postcode.hashCode),
                 state.hashCode),
             email.hashCode),
@@ -233,6 +249,7 @@ class _$Billing extends Billing {
           ..add('address1', address1)
           ..add('address2', address2)
           ..add('city', city)
+          ..add('country', country)
           ..add('postcode', postcode)
           ..add('state', state)
           ..add('email', email)
@@ -268,6 +285,10 @@ class BillingBuilder implements Builder<Billing, BillingBuilder> {
   String get city => _$this._city;
   set city(String city) => _$this._city = city;
 
+  String _country;
+  String get country => _$this._country;
+  set country(String country) => _$this._country = country;
+
   String _postcode;
   String get postcode => _$this._postcode;
   set postcode(String postcode) => _$this._postcode = postcode;
@@ -294,6 +315,7 @@ class BillingBuilder implements Builder<Billing, BillingBuilder> {
       _address1 = _$v.address1;
       _address2 = _$v.address2;
       _city = _$v.city;
+      _country = _$v.country;
       _postcode = _$v.postcode;
       _state = _$v.state;
       _email = _$v.email;
@@ -326,6 +348,7 @@ class BillingBuilder implements Builder<Billing, BillingBuilder> {
             address1: address1,
             address2: address2,
             city: city,
+            country: country,
             postcode: postcode,
             state: state,
             email: email,

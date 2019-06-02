@@ -37,8 +37,8 @@ void main() {
     expect(shipping.postcode, '');
   });
   
-  test('first_name is empty', () {
-    expect(shipping.firstName, '');
+  test('country is empty', () {
+    expect(shipping.country, '');
   });
 
   test('state is empty', () {

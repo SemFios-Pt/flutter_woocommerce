@@ -23,6 +23,8 @@ abstract class Billing implements Built<Billing, BillingBuilder> {
 
   String get city;
 
+  String get country;
+
   String get postcode;
 
   String get state;

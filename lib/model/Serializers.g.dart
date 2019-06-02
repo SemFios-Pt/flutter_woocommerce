@@ -9,6 +9,7 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Billing.serializer)
       ..add(Category.serializer)
+      ..add(Customer.serializer)
       ..add(Dimensions.serializer)
       ..add(Href.serializer)
       ..add(Image.serializer)
@@ -23,6 +24,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Href)]),
           () => new ListBuilder<Href>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(MetaData)]),
+          () => new ListBuilder<MetaData>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())
