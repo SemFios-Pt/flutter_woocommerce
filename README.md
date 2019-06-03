@@ -1,5 +1,7 @@
 # flutter_woocommerce
 
+[![Codemagic build status](https://api.codemagic.io/apps/5cf3f4b4f4cf640010603ea1/5cf3f4b4f4cf640010603ea0/status_badge.svg)](https://codemagic.io/apps/5cf3f4b4f4cf640010603ea1/5cf3f4b4f4cf640010603ea0/latest_build)
+
 A new Flutter package project.
 
 ## Getting Started
