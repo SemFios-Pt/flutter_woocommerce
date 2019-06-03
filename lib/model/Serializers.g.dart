@@ -13,9 +13,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Dimensions.serializer)
       ..add(Href.serializer)
       ..add(Image.serializer)
+      ..add(LineItem.serializer)
       ..add(Link.serializer)
       ..add(MetaData.serializer)
       ..add(Product.serializer)
+      ..add(Refund.serializer)
       ..add(Shipping.serializer)
       ..add(Tag.serializer)
       ..addBuilderFactory(
@@ -24,6 +26,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Href)]),
           () => new ListBuilder<Href>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(MetaData)]),
+          () => new ListBuilder<MetaData>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MetaData)]),
           () => new ListBuilder<MetaData>())

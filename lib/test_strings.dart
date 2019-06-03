@@ -63,4 +63,31 @@ class TestStrings {
   static const String CUSTOMER_JSON = r'''
     {"id":2,"date_created":"2019-06-01T14:29:03","date_created_gmt":"2019-06-01T14:29:03","date_modified":null,"date_modified_gmt":null,"email":"dummy@gmail.com","first_name":"sagar","last_name":"rai","role":"customer","username":"dummy","billing":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","postcode":"","country":"","state":"","email":"","phone":""},"shipping":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","postcode":"","country":"","state":""},"is_paying_customer":false,"orders_count":0,"total_spent":"0.00","avatar_url":"http:\/\/1.gravatar.com\/avatar\/d997020ebc85538140cc01d69c6127a5?s=96&d=mm&r=g","meta_data":[],"_links":{"self":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/customers\/2"}],"collection":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/customers"}]}}
   ''';
+
+  static const String REFUND_JSON = r'''
+    {
+      "id": 93,
+      "reason": "damage hoodie",
+      "total": "-250.00"
+    }
+  ''';
+
+  static const String LINE_ITEM_JSON = r'''
+    {
+      "id": 4,
+      "name": "Hoodie with Pocket",
+      "product_id": 19,
+      "variation_id": 0,
+      "quantity": 7,
+      "tax_class": "",
+      "subtotal": "245.00",
+      "subtotal_tax": "0.00",
+      "total": "245.00",
+      "total_tax": "0.00",
+      "taxes": [],
+      "meta_data": [],
+      "sku": "woo-hoodie-with-pocket",
+      "price": 35
+    }
+  ''';
 }
