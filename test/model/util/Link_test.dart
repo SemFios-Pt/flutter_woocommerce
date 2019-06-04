@@ -26,4 +26,8 @@ void main() {
     expect(link.collection.first.href, 'http://paathsala-wp.test/wp-json/wc/v2/products');
   });
 
+  test('customer', (){
+    expect(link.customer, null);
+  });
+
 }

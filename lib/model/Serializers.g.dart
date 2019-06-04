@@ -16,6 +16,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(LineItem.serializer)
       ..add(Link.serializer)
       ..add(MetaData.serializer)
+      ..add(Order.serializer)
       ..add(Product.serializer)
       ..add(Refund.serializer)
       ..add(Shipping.serializer)
@@ -28,6 +29,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(Href)]),
           () => new ListBuilder<Href>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Href)]),
+          () => new ListBuilder<Href>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(MetaData)]),
+          () => new ListBuilder<MetaData>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MetaData)]),
           () => new ListBuilder<MetaData>())
       ..addBuilderFactory(
@@ -36,6 +43,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MetaData)]),
           () => new ListBuilder<MetaData>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(LineItem)]),
+          () => new ListBuilder<LineItem>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(ShippingLine)]),
+          () => new ListBuilder<ShippingLine>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Refund)]),
+          () => new ListBuilder<Refund>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())
