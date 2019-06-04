@@ -90,4 +90,28 @@ class TestStrings {
       "price": 35
     }
   ''';
+
+  static const String SHPPING_LINE_JSON = r'''
+    {
+        "id": 12118,
+        "method_title": "Flat rate",
+        "method_id": "flat_rate",
+        "instance_id": "2",
+        "total": "20.00",
+        "total_tax": "0.00",
+        "taxes": [],
+        "meta_data": [
+          {
+            "id": 95098,
+            "key": "Items",
+            "value": "Veg Fry Momo &times; 1"
+          },
+          {
+            "id": 95099,
+            "key": "seller_id",
+            "value": "52"
+          }
+        ]
+      }
+  ''';
 }

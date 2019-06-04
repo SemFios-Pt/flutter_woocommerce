@@ -9,6 +9,7 @@ import 'package:flutter_woocommerce/model/util/Billing.dart';
 import 'package:flutter_woocommerce/model/util/Shipping.dart';
 import 'package:flutter_woocommerce/model/util/Refund.dart';
 import 'package:flutter_woocommerce/model/util/LineItem.dart';
+import 'package:flutter_woocommerce/model/util/ShippingLine.dart';
 import 'package:flutter_woocommerce/model/Product.dart';
 import 'package:flutter_woocommerce/model/Customer.dart';
 
@@ -21,6 +22,7 @@ part 'Serializers.g.dart';
   Shipping,
   Refund,
   LineItem,
+  ShippingLine,
   Product,
   Customer
 ])
