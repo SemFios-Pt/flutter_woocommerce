@@ -13,6 +13,7 @@ import 'package:flutter_woocommerce/model/util/ShippingLine.dart';
 import 'package:flutter_woocommerce/model/Product.dart';
 import 'package:flutter_woocommerce/model/Customer.dart';
 import 'package:flutter_woocommerce/model/Order.dart';
+import 'package:flutter_woocommerce/model/Coupon.dart';
 
 part 'Serializers.g.dart';
 
@@ -26,7 +27,8 @@ part 'Serializers.g.dart';
   ShippingLine,
   Product,
   Customer,
-  Order
+  Order,
+  Coupon
 ])
 
 final Serializers serializers = (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
