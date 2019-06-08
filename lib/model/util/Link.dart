@@ -14,6 +14,9 @@ abstract class Link implements Built<Link, LinkBuilder> {
   @nullable
   BuiltList<Href> get customer;
 
+  @nullable
+  BuiltList<Href> get up;
+
   Link._();
 
   factory Link([updates(LinkBuilder b)]) = _$Link;

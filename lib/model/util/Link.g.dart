@@ -35,6 +35,13 @@ class _$LinkSerializer implements StructuredSerializer<Link> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(Href)])));
     }
+    if (object.up != null) {
+      result
+        ..add('up')
+        ..add(serializers.serialize(object.up,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Href)])));
+    }
     return result;
   }
 
@@ -63,6 +70,12 @@ class _$LinkSerializer implements StructuredSerializer<Link> {
           break;
         case 'customer':
           result.customer.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Href)]))
+              as BuiltList);
+          break;
+        case 'up':
+          result.up.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Href)]))
               as BuiltList);
@@ -120,11 +133,13 @@ class _$Link extends Link {
   final BuiltList<Href> collection;
   @override
   final BuiltList<Href> customer;
+  @override
+  final BuiltList<Href> up;
 
   factory _$Link([void Function(LinkBuilder) updates]) =>
       (new LinkBuilder()..update(updates)).build();
 
-  _$Link._({this.self, this.collection, this.customer}) : super._() {
+  _$Link._({this.self, this.collection, this.customer, this.up}) : super._() {
     if (self == null) {
       throw new BuiltValueNullFieldError('Link', 'self');
     }
@@ -146,13 +161,15 @@ class _$Link extends Link {
     return other is Link &&
         self == other.self &&
         collection == other.collection &&
-        customer == other.customer;
+        customer == other.customer &&
+        up == other.up;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc(0, self.hashCode), collection.hashCode), customer.hashCode));
+        $jc($jc($jc(0, self.hashCode), collection.hashCode), customer.hashCode),
+        up.hashCode));
   }
 
   @override
@@ -160,7 +177,8 @@ class _$Link extends Link {
     return (newBuiltValueToStringHelper('Link')
           ..add('self', self)
           ..add('collection', collection)
-          ..add('customer', customer))
+          ..add('customer', customer)
+          ..add('up', up))
         .toString();
   }
 }
@@ -183,6 +201,10 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
       _$this._customer ??= new ListBuilder<Href>();
   set customer(ListBuilder<Href> customer) => _$this._customer = customer;
 
+  ListBuilder<Href> _up;
+  ListBuilder<Href> get up => _$this._up ??= new ListBuilder<Href>();
+  set up(ListBuilder<Href> up) => _$this._up = up;
+
   LinkBuilder();
 
   LinkBuilder get _$this {
@@ -190,6 +212,7 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
       _self = _$v.self?.toBuilder();
       _collection = _$v.collection?.toBuilder();
       _customer = _$v.customer?.toBuilder();
+      _up = _$v.up?.toBuilder();
       _$v = null;
     }
     return this;
@@ -216,7 +239,8 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
           new _$Link._(
               self: self.build(),
               collection: collection.build(),
-              customer: _customer?.build());
+              customer: _customer?.build(),
+              up: _up?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -226,6 +250,8 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
         collection.build();
         _$failedField = 'customer';
         _customer?.build();
+        _$failedField = 'up';
+        _up?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Link', _$failedField, e.toString());

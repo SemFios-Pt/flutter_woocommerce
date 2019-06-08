@@ -33,6 +33,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(Href)]),
           () => new ListBuilder<Href>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Href)]),
+          () => new ListBuilder<Href>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(MetaData)]),
+          () => new ListBuilder<MetaData>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MetaData)]),
           () => new ListBuilder<MetaData>())
       ..addBuilderFactory(
@@ -41,6 +47,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MetaData)]),
           () => new ListBuilder<MetaData>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(LineItem)]),
+          () => new ListBuilder<LineItem>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MetaData)]),
           () => new ListBuilder<MetaData>())

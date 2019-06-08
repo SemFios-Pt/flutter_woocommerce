@@ -65,11 +65,7 @@ class TestStrings {
   ''';
 
   static const String REFUND_JSON = r'''
-    {
-      "id": 93,
-      "reason": "damage hoodie",
-      "total": "-250.00"
-    }
+    {"id":93,"date_created":"2019-06-03T14:07:59","date_created_gmt":"2019-06-03T14:07:59","amount":"250.00","reason":"damage hoodie","refunded_by":1,"refunded_payment":false,"meta_data":[],"line_items":[],"_links":{"self":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/orders\/67\/refunds\/93"}],"collection":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/orders\/67\/refunds"}],"up":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/orders\/67"}]}}
   ''';
 
   static const String LINE_ITEM_JSON = r'''
