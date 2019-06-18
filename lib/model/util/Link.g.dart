@@ -28,6 +28,13 @@ class _$LinkSerializer implements StructuredSerializer<Link> {
           specifiedType:
               const FullType(BuiltList, const [const FullType(Href)])),
     ];
+    if (object.about != null) {
+      result
+        ..add('about')
+        ..add(serializers.serialize(object.about,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Href)])));
+    }
     if (object.customer != null) {
       result
         ..add('customer')
@@ -39,6 +46,13 @@ class _$LinkSerializer implements StructuredSerializer<Link> {
       result
         ..add('up')
         ..add(serializers.serialize(object.up,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Href)])));
+    }
+    if (object.product != null) {
+      result
+        ..add('product')
+        ..add(serializers.serialize(object.product,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(Href)])));
     }
@@ -68,6 +82,12 @@ class _$LinkSerializer implements StructuredSerializer<Link> {
                       const FullType(BuiltList, const [const FullType(Href)]))
               as BuiltList);
           break;
+        case 'about':
+          result.about.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Href)]))
+              as BuiltList);
+          break;
         case 'customer':
           result.customer.replace(serializers.deserialize(value,
                   specifiedType:
@@ -76,6 +96,12 @@ class _$LinkSerializer implements StructuredSerializer<Link> {
           break;
         case 'up':
           result.up.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Href)]))
+              as BuiltList);
+          break;
+        case 'product':
+          result.product.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Href)]))
               as BuiltList);
@@ -132,14 +158,25 @@ class _$Link extends Link {
   @override
   final BuiltList<Href> collection;
   @override
+  final BuiltList<Href> about;
+  @override
   final BuiltList<Href> customer;
   @override
   final BuiltList<Href> up;
+  @override
+  final BuiltList<Href> product;
 
   factory _$Link([void Function(LinkBuilder) updates]) =>
       (new LinkBuilder()..update(updates)).build();
 
-  _$Link._({this.self, this.collection, this.customer, this.up}) : super._() {
+  _$Link._(
+      {this.self,
+      this.collection,
+      this.about,
+      this.customer,
+      this.up,
+      this.product})
+      : super._() {
     if (self == null) {
       throw new BuiltValueNullFieldError('Link', 'self');
     }
@@ -161,15 +198,22 @@ class _$Link extends Link {
     return other is Link &&
         self == other.self &&
         collection == other.collection &&
+        about == other.about &&
         customer == other.customer &&
-        up == other.up;
+        up == other.up &&
+        product == other.product;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, self.hashCode), collection.hashCode), customer.hashCode),
-        up.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, self.hashCode), collection.hashCode),
+                    about.hashCode),
+                customer.hashCode),
+            up.hashCode),
+        product.hashCode));
   }
 
   @override
@@ -177,8 +221,10 @@ class _$Link extends Link {
     return (newBuiltValueToStringHelper('Link')
           ..add('self', self)
           ..add('collection', collection)
+          ..add('about', about)
           ..add('customer', customer)
-          ..add('up', up))
+          ..add('up', up)
+          ..add('product', product))
         .toString();
   }
 }
@@ -196,6 +242,10 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
   set collection(ListBuilder<Href> collection) =>
       _$this._collection = collection;
 
+  ListBuilder<Href> _about;
+  ListBuilder<Href> get about => _$this._about ??= new ListBuilder<Href>();
+  set about(ListBuilder<Href> about) => _$this._about = about;
+
   ListBuilder<Href> _customer;
   ListBuilder<Href> get customer =>
       _$this._customer ??= new ListBuilder<Href>();
@@ -205,14 +255,20 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
   ListBuilder<Href> get up => _$this._up ??= new ListBuilder<Href>();
   set up(ListBuilder<Href> up) => _$this._up = up;
 
+  ListBuilder<Href> _product;
+  ListBuilder<Href> get product => _$this._product ??= new ListBuilder<Href>();
+  set product(ListBuilder<Href> product) => _$this._product = product;
+
   LinkBuilder();
 
   LinkBuilder get _$this {
     if (_$v != null) {
       _self = _$v.self?.toBuilder();
       _collection = _$v.collection?.toBuilder();
+      _about = _$v.about?.toBuilder();
       _customer = _$v.customer?.toBuilder();
       _up = _$v.up?.toBuilder();
+      _product = _$v.product?.toBuilder();
       _$v = null;
     }
     return this;
@@ -239,8 +295,10 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
           new _$Link._(
               self: self.build(),
               collection: collection.build(),
+              about: _about?.build(),
               customer: _customer?.build(),
-              up: _up?.build());
+              up: _up?.build(),
+              product: _product?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -248,10 +306,14 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
         self.build();
         _$failedField = 'collection';
         collection.build();
+        _$failedField = 'about';
+        _about?.build();
         _$failedField = 'customer';
         _customer?.build();
         _$failedField = 'up';
         _up?.build();
+        _$failedField = 'product';
+        _product?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Link', _$failedField, e.toString());

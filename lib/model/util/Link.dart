@@ -12,10 +12,16 @@ abstract class Link implements Built<Link, LinkBuilder> {
   BuiltList<Href> get collection;
 
   @nullable
+  BuiltList<Href> get about;
+
+  @nullable
   BuiltList<Href> get customer;
 
   @nullable
   BuiltList<Href> get up;
+
+  @nullable
+  BuiltList<Href> get product;
 
   Link._();
 
