@@ -2,9 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_woocommerce/test_strings.dart';
-import 'package:flutter_woocommerce/model/Serializers.dart';
+import 'package:flutter_woocommerce/model/serializers.dart';
 import 'package:flutter_woocommerce/model/report/sale.dart';
-import 'package:flutter_woocommerce/model/util/Link.dart';
+import 'package:flutter_woocommerce/model/util/link.dart';
 
 
 void main() {

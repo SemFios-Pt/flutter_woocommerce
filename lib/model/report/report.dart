@@ -1,6 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:flutter_woocommerce/model/util/Link.dart';
+import 'package:flutter_woocommerce/model/util/link.dart';
 
 part 'report.g.dart';
 
