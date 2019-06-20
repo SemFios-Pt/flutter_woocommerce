@@ -7,10 +7,12 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Attribute.serializer)
       ..add(Billing.serializer)
       ..add(Category.serializer)
       ..add(Coupon.serializer)
       ..add(Customer.serializer)
+      ..add(DefaultAttribute.serializer)
       ..add(Dimensions.serializer)
       ..add(Href.serializer)
       ..add(Image.serializer)
@@ -20,9 +22,17 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Order.serializer)
       ..add(Product.serializer)
       ..add(Refund.serializer)
+      ..add(Report.serializer)
+      ..add(Sale.serializer)
       ..add(Shipping.serializer)
       ..add(ShippingLine.serializer)
       ..add(Tag.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Href)]),
+          () => new ListBuilder<Href>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Href)]),
+          () => new ListBuilder<Href>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Href)]),
           () => new ListBuilder<Href>())
@@ -63,6 +73,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(Refund)]),
           () => new ListBuilder<Refund>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())
       ..addBuilderFactory(
@@ -80,6 +93,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Image)]),
           () => new ListBuilder<Image>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Attribute)]),
+          () => new ListBuilder<Attribute>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(DefaultAttribute)]),
+          () => new ListBuilder<DefaultAttribute>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => new ListBuilder<int>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MetaData)]),
           () => new ListBuilder<MetaData>())

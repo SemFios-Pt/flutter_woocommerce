@@ -9,8 +9,9 @@ part of 'Product.dart';
 Serializer<Product> _$productSerializer = new _$ProductSerializer();
 Serializer<Dimensions> _$dimensionsSerializer = new _$DimensionsSerializer();
 Serializer<Image> _$imageSerializer = new _$ImageSerializer();
-Serializer<Category> _$categorySerializer = new _$CategorySerializer();
-Serializer<Tag> _$tagSerializer = new _$TagSerializer();
+Serializer<Attribute> _$attributeSerializer = new _$AttributeSerializer();
+Serializer<DefaultAttribute> _$defaultAttributeSerializer =
+    new _$DefaultAttributeSerializer();
 
 class _$ProductSerializer implements StructuredSerializer<Product> {
   @override
@@ -226,6 +227,27 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
         ..add('stock_quantity')
         ..add(serializers.serialize(object.stockQuantity,
             specifiedType: const FullType(String)));
+    }
+    if (object.attributes != null) {
+      result
+        ..add('attributes')
+        ..add(serializers.serialize(object.attributes,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Attribute)])));
+    }
+    if (object.defaultAttributes != null) {
+      result
+        ..add('default_attributes')
+        ..add(serializers.serialize(object.defaultAttributes,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(DefaultAttribute)])));
+    }
+    if (object.variations != null) {
+      result
+        ..add('variations')
+        ..add(serializers.serialize(object.variations,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(int)])));
     }
     return result;
   }
@@ -484,6 +506,23 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
                       const FullType(BuiltList, const [const FullType(Image)]))
               as BuiltList);
           break;
+        case 'attributes':
+          result.attributes.replace(serializers.deserialize(value,
+              specifiedType: const FullType(
+                  BuiltList, const [const FullType(Attribute)])) as BuiltList);
+          break;
+        case 'default_attributes':
+          result.defaultAttributes.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(DefaultAttribute)]))
+              as BuiltList);
+          break;
+        case 'variations':
+          result.variations.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(int)]))
+              as BuiltList);
+          break;
         case 'menu_order':
           result.menuOrder = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
@@ -650,31 +689,42 @@ class _$ImageSerializer implements StructuredSerializer<Image> {
   }
 }
 
-class _$CategorySerializer implements StructuredSerializer<Category> {
+class _$AttributeSerializer implements StructuredSerializer<Attribute> {
   @override
-  final Iterable<Type> types = const [Category, _$Category];
+  final Iterable<Type> types = const [Attribute, _$Attribute];
   @override
-  final String wireName = 'Category';
+  final String wireName = 'Attribute';
 
   @override
-  Iterable serialize(Serializers serializers, Category object,
+  Iterable serialize(Serializers serializers, Attribute object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'slug',
-      serializers.serialize(object.slug, specifiedType: const FullType(String)),
+      'position',
+      serializers.serialize(object.position,
+          specifiedType: const FullType(int)),
+      'visible',
+      serializers.serialize(object.visible,
+          specifiedType: const FullType(bool)),
+      'variation',
+      serializers.serialize(object.variation,
+          specifiedType: const FullType(bool)),
+      'options',
+      serializers.serialize(object.options,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(String)])),
     ];
 
     return result;
   }
 
   @override
-  Category deserialize(Serializers serializers, Iterable serialized,
+  Attribute deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CategoryBuilder();
+    final result = new AttributeBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -690,9 +740,23 @@ class _$CategorySerializer implements StructuredSerializer<Category> {
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'slug':
-          result.slug = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+        case 'position':
+          result.position = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'visible':
+          result.visible = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'variation':
+          result.variation = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'options':
+          result.options.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(String)]))
+              as BuiltList);
           break;
       }
     }
@@ -701,31 +765,33 @@ class _$CategorySerializer implements StructuredSerializer<Category> {
   }
 }
 
-class _$TagSerializer implements StructuredSerializer<Tag> {
+class _$DefaultAttributeSerializer
+    implements StructuredSerializer<DefaultAttribute> {
   @override
-  final Iterable<Type> types = const [Tag, _$Tag];
+  final Iterable<Type> types = const [DefaultAttribute, _$DefaultAttribute];
   @override
-  final String wireName = 'Tag';
+  final String wireName = 'DefaultAttribute';
 
   @override
-  Iterable serialize(Serializers serializers, Tag object,
+  Iterable serialize(Serializers serializers, DefaultAttribute object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'slug',
-      serializers.serialize(object.slug, specifiedType: const FullType(String)),
+      'option',
+      serializers.serialize(object.option,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
   }
 
   @override
-  Tag deserialize(Serializers serializers, Iterable serialized,
+  DefaultAttribute deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new TagBuilder();
+    final result = new DefaultAttributeBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -741,8 +807,8 @@ class _$TagSerializer implements StructuredSerializer<Tag> {
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'slug':
-          result.slug = serializers.deserialize(value,
+        case 'option':
+          result.option = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
       }
@@ -870,6 +936,12 @@ class _$Product extends Product {
   @override
   final BuiltList<Image> images;
   @override
+  final BuiltList<Attribute> attributes;
+  @override
+  final BuiltList<DefaultAttribute> defaultAttributes;
+  @override
+  final BuiltList<int> variations;
+  @override
   final int menuOrder;
   @override
   final BuiltList<MetaData> metaData;
@@ -938,6 +1010,9 @@ class _$Product extends Product {
       this.categories,
       this.tags,
       this.images,
+      this.attributes,
+      this.defaultAttributes,
+      this.variations,
       this.menuOrder,
       this.metaData,
       this.links})
@@ -1175,6 +1250,9 @@ class _$Product extends Product {
         categories == other.categories &&
         tags == other.tags &&
         images == other.images &&
+        attributes == other.attributes &&
+        defaultAttributes == other.defaultAttributes &&
+        variations == other.variations &&
         menuOrder == other.menuOrder &&
         metaData == other.metaData &&
         links == other.links;
@@ -1200,23 +1278,23 @@ class _$Product extends Product {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, id.hashCode), name.hashCode), slug.hashCode), permalink.hashCode), dateCreated.hashCode), dateCreatedGmt.hashCode), dateModified.hashCode), dateModifiedGmt.hashCode), type.hashCode), status.hashCode), featured.hashCode), catalogVisibility.hashCode), description.hashCode), shortDescription.hashCode), sku.hashCode), price.hashCode), regularPrice.hashCode), salePrice.hashCode), dateOnSaleFrom.hashCode), dateOnSaleFromGmt.hashCode), dateOnSaleTo.hashCode), dateOnSaleToGmt.hashCode), priceHtml.hashCode), onSale.hashCode), purchasable.hashCode), totalSales.hashCode), virtual.hashCode), downloadable.hashCode), downloadLimit.hashCode), downloadExpiry.hashCode), externalUrl.hashCode), buttonText.hashCode), taxStatus.hashCode), taxClass.hashCode), manageStock.hashCode), stockQuantity.hashCode), inStock.hashCode), backorders.hashCode), backordersAllowed.hashCode), backordered.hashCode), soldIndividually.hashCode), weight.hashCode),
-                                                                                dimensions.hashCode),
-                                                                            shippingRequired.hashCode),
-                                                                        shippingTaxable.hashCode),
-                                                                    shippingClass.hashCode),
-                                                                shippingClassId.hashCode),
-                                                            reviewsAllowed.hashCode),
-                                                        averageRating.hashCode),
-                                                    ratingCount.hashCode),
-                                                relatedIds.hashCode),
-                                            upsellIds.hashCode),
-                                        crossSellIds.hashCode),
-                                    parentId.hashCode),
-                                purchaseNote.hashCode),
-                            categories.hashCode),
-                        tags.hashCode),
-                    images.hashCode),
+                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, id.hashCode), name.hashCode), slug.hashCode), permalink.hashCode), dateCreated.hashCode), dateCreatedGmt.hashCode), dateModified.hashCode), dateModifiedGmt.hashCode), type.hashCode), status.hashCode), featured.hashCode), catalogVisibility.hashCode), description.hashCode), shortDescription.hashCode), sku.hashCode), price.hashCode), regularPrice.hashCode), salePrice.hashCode), dateOnSaleFrom.hashCode), dateOnSaleFromGmt.hashCode), dateOnSaleTo.hashCode), dateOnSaleToGmt.hashCode), priceHtml.hashCode), onSale.hashCode), purchasable.hashCode), totalSales.hashCode), virtual.hashCode), downloadable.hashCode), downloadLimit.hashCode), downloadExpiry.hashCode), externalUrl.hashCode), buttonText.hashCode), taxStatus.hashCode), taxClass.hashCode), manageStock.hashCode), stockQuantity.hashCode), inStock.hashCode), backorders.hashCode), backordersAllowed.hashCode), backordered.hashCode), soldIndividually.hashCode), weight.hashCode), dimensions.hashCode), shippingRequired.hashCode), shippingTaxable.hashCode),
+                                                                                shippingClass.hashCode),
+                                                                            shippingClassId.hashCode),
+                                                                        reviewsAllowed.hashCode),
+                                                                    averageRating.hashCode),
+                                                                ratingCount.hashCode),
+                                                            relatedIds.hashCode),
+                                                        upsellIds.hashCode),
+                                                    crossSellIds.hashCode),
+                                                parentId.hashCode),
+                                            purchaseNote.hashCode),
+                                        categories.hashCode),
+                                    tags.hashCode),
+                                images.hashCode),
+                            attributes.hashCode),
+                        defaultAttributes.hashCode),
+                    variations.hashCode),
                 menuOrder.hashCode),
             metaData.hashCode),
         links.hashCode));
@@ -1283,6 +1361,9 @@ class _$Product extends Product {
           ..add('categories', categories)
           ..add('tags', tags)
           ..add('images', images)
+          ..add('attributes', attributes)
+          ..add('defaultAttributes', defaultAttributes)
+          ..add('variations', variations)
           ..add('menuOrder', menuOrder)
           ..add('metaData', metaData)
           ..add('links', links))
@@ -1551,6 +1632,24 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
   ListBuilder<Image> get images => _$this._images ??= new ListBuilder<Image>();
   set images(ListBuilder<Image> images) => _$this._images = images;
 
+  ListBuilder<Attribute> _attributes;
+  ListBuilder<Attribute> get attributes =>
+      _$this._attributes ??= new ListBuilder<Attribute>();
+  set attributes(ListBuilder<Attribute> attributes) =>
+      _$this._attributes = attributes;
+
+  ListBuilder<DefaultAttribute> _defaultAttributes;
+  ListBuilder<DefaultAttribute> get defaultAttributes =>
+      _$this._defaultAttributes ??= new ListBuilder<DefaultAttribute>();
+  set defaultAttributes(ListBuilder<DefaultAttribute> defaultAttributes) =>
+      _$this._defaultAttributes = defaultAttributes;
+
+  ListBuilder<int> _variations;
+  ListBuilder<int> get variations =>
+      _$this._variations ??= new ListBuilder<int>();
+  set variations(ListBuilder<int> variations) =>
+      _$this._variations = variations;
+
   int _menuOrder;
   int get menuOrder => _$this._menuOrder;
   set menuOrder(int menuOrder) => _$this._menuOrder = menuOrder;
@@ -1626,6 +1725,9 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
       _categories = _$v.categories?.toBuilder();
       _tags = _$v.tags?.toBuilder();
       _images = _$v.images?.toBuilder();
+      _attributes = _$v.attributes?.toBuilder();
+      _defaultAttributes = _$v.defaultAttributes?.toBuilder();
+      _variations = _$v.variations?.toBuilder();
       _menuOrder = _$v.menuOrder;
       _metaData = _$v.metaData?.toBuilder();
       _links = _$v.links?.toBuilder();
@@ -1711,6 +1813,9 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
               categories: categories.build(),
               tags: tags.build(),
               images: images.build(),
+              attributes: _attributes?.build(),
+              defaultAttributes: _defaultAttributes?.build(),
+              variations: _variations?.build(),
               menuOrder: menuOrder,
               metaData: metaData.build(),
               links: links.build());
@@ -1733,6 +1838,12 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
         tags.build();
         _$failedField = 'images';
         images.build();
+        _$failedField = 'attributes';
+        _attributes?.build();
+        _$failedField = 'defaultAttributes';
+        _defaultAttributes?.build();
+        _$failedField = 'variations';
+        _variations?.build();
 
         _$failedField = 'metaData';
         metaData.build();
@@ -2062,62 +2173,95 @@ class ImageBuilder implements Builder<Image, ImageBuilder> {
   }
 }
 
-class _$Category extends Category {
+class _$Attribute extends Attribute {
   @override
   final int id;
   @override
   final String name;
   @override
-  final String slug;
+  final int position;
+  @override
+  final bool visible;
+  @override
+  final bool variation;
+  @override
+  final BuiltList<String> options;
 
-  factory _$Category([void Function(CategoryBuilder) updates]) =>
-      (new CategoryBuilder()..update(updates)).build();
+  factory _$Attribute([void Function(AttributeBuilder) updates]) =>
+      (new AttributeBuilder()..update(updates)).build();
 
-  _$Category._({this.id, this.name, this.slug}) : super._() {
+  _$Attribute._(
+      {this.id,
+      this.name,
+      this.position,
+      this.visible,
+      this.variation,
+      this.options})
+      : super._() {
     if (id == null) {
-      throw new BuiltValueNullFieldError('Category', 'id');
+      throw new BuiltValueNullFieldError('Attribute', 'id');
     }
     if (name == null) {
-      throw new BuiltValueNullFieldError('Category', 'name');
+      throw new BuiltValueNullFieldError('Attribute', 'name');
     }
-    if (slug == null) {
-      throw new BuiltValueNullFieldError('Category', 'slug');
+    if (position == null) {
+      throw new BuiltValueNullFieldError('Attribute', 'position');
+    }
+    if (visible == null) {
+      throw new BuiltValueNullFieldError('Attribute', 'visible');
+    }
+    if (variation == null) {
+      throw new BuiltValueNullFieldError('Attribute', 'variation');
+    }
+    if (options == null) {
+      throw new BuiltValueNullFieldError('Attribute', 'options');
     }
   }
 
   @override
-  Category rebuild(void Function(CategoryBuilder) updates) =>
+  Attribute rebuild(void Function(AttributeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  CategoryBuilder toBuilder() => new CategoryBuilder()..replace(this);
+  AttributeBuilder toBuilder() => new AttributeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Category &&
+    return other is Attribute &&
         id == other.id &&
         name == other.name &&
-        slug == other.slug;
+        position == other.position &&
+        visible == other.visible &&
+        variation == other.variation &&
+        options == other.options;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), slug.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc($jc($jc($jc(0, id.hashCode), name.hashCode), position.hashCode),
+                visible.hashCode),
+            variation.hashCode),
+        options.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Category')
+    return (newBuiltValueToStringHelper('Attribute')
           ..add('id', id)
           ..add('name', name)
-          ..add('slug', slug))
+          ..add('position', position)
+          ..add('visible', visible)
+          ..add('variation', variation)
+          ..add('options', options))
         .toString();
   }
 }
 
-class CategoryBuilder implements Builder<Category, CategoryBuilder> {
-  _$Category _$v;
+class AttributeBuilder implements Builder<Attribute, AttributeBuilder> {
+  _$Attribute _$v;
 
   int _id;
   int get id => _$this._id;
@@ -2127,99 +2271,138 @@ class CategoryBuilder implements Builder<Category, CategoryBuilder> {
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
 
-  String _slug;
-  String get slug => _$this._slug;
-  set slug(String slug) => _$this._slug = slug;
+  int _position;
+  int get position => _$this._position;
+  set position(int position) => _$this._position = position;
 
-  CategoryBuilder();
+  bool _visible;
+  bool get visible => _$this._visible;
+  set visible(bool visible) => _$this._visible = visible;
 
-  CategoryBuilder get _$this {
+  bool _variation;
+  bool get variation => _$this._variation;
+  set variation(bool variation) => _$this._variation = variation;
+
+  ListBuilder<String> _options;
+  ListBuilder<String> get options =>
+      _$this._options ??= new ListBuilder<String>();
+  set options(ListBuilder<String> options) => _$this._options = options;
+
+  AttributeBuilder();
+
+  AttributeBuilder get _$this {
     if (_$v != null) {
       _id = _$v.id;
       _name = _$v.name;
-      _slug = _$v.slug;
+      _position = _$v.position;
+      _visible = _$v.visible;
+      _variation = _$v.variation;
+      _options = _$v.options?.toBuilder();
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(Category other) {
+  void replace(Attribute other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$Category;
+    _$v = other as _$Attribute;
   }
 
   @override
-  void update(void Function(CategoryBuilder) updates) {
+  void update(void Function(AttributeBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$Category build() {
-    final _$result = _$v ?? new _$Category._(id: id, name: name, slug: slug);
+  _$Attribute build() {
+    _$Attribute _$result;
+    try {
+      _$result = _$v ??
+          new _$Attribute._(
+              id: id,
+              name: name,
+              position: position,
+              visible: visible,
+              variation: variation,
+              options: options.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'options';
+        options.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Attribute', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
 }
 
-class _$Tag extends Tag {
+class _$DefaultAttribute extends DefaultAttribute {
   @override
   final int id;
   @override
   final String name;
   @override
-  final String slug;
+  final String option;
 
-  factory _$Tag([void Function(TagBuilder) updates]) =>
-      (new TagBuilder()..update(updates)).build();
+  factory _$DefaultAttribute(
+          [void Function(DefaultAttributeBuilder) updates]) =>
+      (new DefaultAttributeBuilder()..update(updates)).build();
 
-  _$Tag._({this.id, this.name, this.slug}) : super._() {
+  _$DefaultAttribute._({this.id, this.name, this.option}) : super._() {
     if (id == null) {
-      throw new BuiltValueNullFieldError('Tag', 'id');
+      throw new BuiltValueNullFieldError('DefaultAttribute', 'id');
     }
     if (name == null) {
-      throw new BuiltValueNullFieldError('Tag', 'name');
+      throw new BuiltValueNullFieldError('DefaultAttribute', 'name');
     }
-    if (slug == null) {
-      throw new BuiltValueNullFieldError('Tag', 'slug');
+    if (option == null) {
+      throw new BuiltValueNullFieldError('DefaultAttribute', 'option');
     }
   }
 
   @override
-  Tag rebuild(void Function(TagBuilder) updates) =>
+  DefaultAttribute rebuild(void Function(DefaultAttributeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  TagBuilder toBuilder() => new TagBuilder()..replace(this);
+  DefaultAttributeBuilder toBuilder() =>
+      new DefaultAttributeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Tag &&
+    return other is DefaultAttribute &&
         id == other.id &&
         name == other.name &&
-        slug == other.slug;
+        option == other.option;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), slug.hashCode));
+    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), option.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Tag')
+    return (newBuiltValueToStringHelper('DefaultAttribute')
           ..add('id', id)
           ..add('name', name)
-          ..add('slug', slug))
+          ..add('option', option))
         .toString();
   }
 }
 
-class TagBuilder implements Builder<Tag, TagBuilder> {
-  _$Tag _$v;
+class DefaultAttributeBuilder
+    implements Builder<DefaultAttribute, DefaultAttributeBuilder> {
+  _$DefaultAttribute _$v;
 
   int _id;
   int get id => _$this._id;
@@ -2229,38 +2412,39 @@ class TagBuilder implements Builder<Tag, TagBuilder> {
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
 
-  String _slug;
-  String get slug => _$this._slug;
-  set slug(String slug) => _$this._slug = slug;
+  String _option;
+  String get option => _$this._option;
+  set option(String option) => _$this._option = option;
 
-  TagBuilder();
+  DefaultAttributeBuilder();
 
-  TagBuilder get _$this {
+  DefaultAttributeBuilder get _$this {
     if (_$v != null) {
       _id = _$v.id;
       _name = _$v.name;
-      _slug = _$v.slug;
+      _option = _$v.option;
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(Tag other) {
+  void replace(DefaultAttribute other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$Tag;
+    _$v = other as _$DefaultAttribute;
   }
 
   @override
-  void update(void Function(TagBuilder) updates) {
+  void update(void Function(DefaultAttributeBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$Tag build() {
-    final _$result = _$v ?? new _$Tag._(id: id, name: name, slug: slug);
+  _$DefaultAttribute build() {
+    final _$result =
+        _$v ?? new _$DefaultAttribute._(id: id, name: name, option: option);
     replace(_$result);
     return _$result;
   }

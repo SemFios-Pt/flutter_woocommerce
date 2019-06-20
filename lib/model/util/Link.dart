@@ -7,8 +7,10 @@ part 'Link.g.dart';
 abstract class Link implements Built<Link, LinkBuilder> {
   static Serializer<Link> get serializer => _$linkSerializer;
 
+  @nullable
   BuiltList<Href> get self;
 
+  @nullable
   BuiltList<Href> get collection;
 
   @nullable

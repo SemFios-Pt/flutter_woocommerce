@@ -118,4 +118,35 @@ class TestStrings {
   static const String COUPON_JSON = r'''
     {"id":134,"code":"tamang","amount":"100.00","date_created":"2019-06-04T15:29:54","date_created_gmt":"2019-06-04T15:29:54","date_modified":"2019-06-04T15:33:58","date_modified_gmt":"2019-06-04T15:33:58","discount_type":"fixed_cart","description":"","date_expires":null,"date_expires_gmt":null,"usage_count":0,"individual_use":false,"product_ids":[],"excluded_product_ids":[],"usage_limit":null,"usage_limit_per_user":null,"limit_usage_to_x_items":null,"free_shipping":false,"product_categories":[],"excluded_product_categories":[],"exclude_sale_items":false,"minimum_amount":"0.00","maximum_amount":"0.00","email_restrictions":[],"used_by":[],"meta_data":[],"_links":{"self":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/coupons\/134"}],"collection":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/coupons"}]}}
   ''';
+
+  static const String CATEGORY_JSON = r'''
+    {"id":19,"name":"Accessories","slug":"accessories","parent":16,"description":"","display":"default","image":null,"menu_order":0,"count":5,"_links":{"self":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/products\/categories\/19"}],"collection":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/products\/categories"}],"up":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/products\/categories\/16"}]}}
+  ''';
+
+  static const String TAG_JSON = r'''
+    {"id":32,"name":"Telephone","slug":"telephone","description":"","count":0,"_links":{"self":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/products\/tags\/32"}],"collection":[{"href":"http:\/\/paathsala-wp.test\/wp-json\/wc\/v2\/products\/tags"}]}}
+  ''';
+
+  static const String REPORT_JSON = r'''
+    {
+    "slug": "top_sellers",
+    "description": "List of top sellers products.",
+    "_links": {
+      "self": [
+        {
+          "href": "https:\/\/mamham.com\/wp-json\/wc\/v2\/reports\/top_sellers"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https:\/\/mamham.com\/wp-json\/wc\/v2\/reports"
+        }
+      ]
+    }
+  }
+  ''';
+
+  static const String REPORT_SALE_JSON = r'''
+    {"total_sales":"51425.00","net_sales":"49425.00","average_sales":"7060.71","total_orders":132,"total_items":360,"total_tax":"0.00","total_shipping":"2000.00","total_refunds":110,"total_discount":"0.00","totals_grouped_by":"day","totals":{"2019-06-09":{"sales":"6505.00","orders":19,"items":55,"tax":"0.00","shipping":"400.00","discount":"0.00","customers":12},"2019-06-10":{"sales":"13335.00","orders":29,"items":79,"tax":"0.00","shipping":"390.00","discount":"0.00","customers":11},"2019-06-11":{"sales":"6395.00","orders":20,"items":45,"tax":"0.00","shipping":"250.00","discount":"0.00","customers":10},"2019-06-12":{"sales":"8125.00","orders":17,"items":59,"tax":"0.00","shipping":"340.00","discount":"0.00","customers":9},"2019-06-13":{"sales":"12205.00","orders":30,"items":86,"tax":"0.00","shipping":"370.00","discount":"0.00","customers":18},"2019-06-14":{"sales":"4970.00","orders":17,"items":36,"tax":"0.00","shipping":"310.00","discount":"0.00","customers":16},"2019-06-15":{"sales":"0.00","orders":0,"items":0,"tax":"0.00","shipping":"0.00","discount":"0.00","customers":0}},"total_customers":76,"_links":{"about":[{"href":"https:\/\/mamham.com\/wp-json\/wc\/v2\/reports"}]}}
+  ''';
 }

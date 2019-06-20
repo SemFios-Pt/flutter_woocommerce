@@ -1,6 +1,8 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
+import 'package:flutter_woocommerce/model/Category.dart';
+import 'package:flutter_woocommerce/model/Tag.dart';
 import 'package:flutter_woocommerce/model/util/Link.dart';
 import 'package:flutter_woocommerce/model/util/MetaData.dart';
 
@@ -86,7 +88,7 @@ abstract class Product implements Built<Product, ProductBuilder> {
 
   bool get downloadable;
 
-  // downloads
+  // TODO: downloads
 
   @BuiltValueField(wireName: 'download_limit')
   int get downloadLimit;
@@ -172,6 +174,22 @@ abstract class Product implements Built<Product, ProductBuilder> {
 
   BuiltList<Image> get images;
 
+  // Present in variable product.
+  @nullable
+  BuiltList<Attribute> get attributes;
+
+  // Present in variable product.
+  @nullable
+  @BuiltValueField(wireName: 'default_attributes')
+  BuiltList<DefaultAttribute> get defaultAttributes;
+
+  // Present in variable product.
+  @nullable
+  BuiltList<int> get variations;
+
+  // Present in variable product.
+  // TODO: grouped_products
+
   @BuiltValueField(wireName: 'menu_order')
   int get menuOrder;
 
@@ -231,30 +249,38 @@ abstract class Image implements Built<Image, ImageBuilder> {
   
 }
 
-abstract class Category implements Built<Category, CategoryBuilder> {
-  static Serializer<Category> get serializer => _$categorySerializer;
+abstract class Attribute implements Built<Attribute, AttributeBuilder> {
+  static Serializer<Attribute> get serializer => _$attributeSerializer;
 
   int get id;
 
   String get name;
 
-  String get slug;
+  int get position;
 
-  Category._();
+  bool get visible;
 
-  factory Category([updates(CategoryBuilder b)]) = _$Category;
+  bool get variation;
+
+  BuiltList<String> get options;
+
+  Attribute._();
+
+  factory Attribute([updates(AttributeBuilder b)]) = _$Attribute;
+  
 }
 
-abstract class Tag implements Built<Tag, TagBuilder> {
-  static Serializer<Tag> get serializer => _$tagSerializer;
+abstract class DefaultAttribute implements Built<DefaultAttribute, DefaultAttributeBuilder> {
+  static Serializer<DefaultAttribute> get serializer => _$defaultAttributeSerializer;
 
   int get id;
 
   String get name;
 
-  String get slug;
+  String get option;
 
-  Tag._();
+  DefaultAttribute._();
 
-  factory Tag([updates(TagBuilder b)]) = _$Tag;
+  factory DefaultAttribute([updates(DefaultAttributeBuilder b)]) = _$DefaultAttribute;
+  
 }

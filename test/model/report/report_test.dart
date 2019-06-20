@@ -8,7 +8,7 @@ import 'package:flutter_woocommerce/model/util/Link.dart';
 
 void main() {
 
-  final parsedJson = json.decode(TestStrings.REPORTS_JSON);
+  final parsedJson = json.decode(TestStrings.REPORT_JSON);
   Report report = serializers.deserializeWith(Report.serializer, parsedJson);
 
   test('slug', (){

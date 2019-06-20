@@ -4,6 +4,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter_woocommerce/test_strings.dart';
 import 'package:flutter_woocommerce/model/Serializers.dart';
 import 'package:flutter_woocommerce/model/Product.dart';
+import 'package:flutter_woocommerce/model/Category.dart';
 import 'package:flutter_woocommerce/model/util/Link.dart';
 
 void main() {
@@ -11,7 +12,7 @@ void main() {
   final parsedJson = json.decode(TestStrings.PRODUCT_JSON);
   Product product = serializers.deserializeWith(Product.serializer, parsedJson);
 
-  test('id is 34', () {
+  test('id', () {
     expect(product.id, 34);
   });
 

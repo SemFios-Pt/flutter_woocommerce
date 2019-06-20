@@ -18,16 +18,21 @@ class _$LinkSerializer implements StructuredSerializer<Link> {
   @override
   Iterable serialize(Serializers serializers, Link object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'self',
-      serializers.serialize(object.self,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(Href)])),
-      'collection',
-      serializers.serialize(object.collection,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(Href)])),
-    ];
+    final result = <Object>[];
+    if (object.self != null) {
+      result
+        ..add('self')
+        ..add(serializers.serialize(object.self,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Href)])));
+    }
+    if (object.collection != null) {
+      result
+        ..add('collection')
+        ..add(serializers.serialize(object.collection,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Href)])));
+    }
     if (object.about != null) {
       result
         ..add('about')
@@ -176,14 +181,7 @@ class _$Link extends Link {
       this.customer,
       this.up,
       this.product})
-      : super._() {
-    if (self == null) {
-      throw new BuiltValueNullFieldError('Link', 'self');
-    }
-    if (collection == null) {
-      throw new BuiltValueNullFieldError('Link', 'collection');
-    }
-  }
+      : super._();
 
   @override
   Link rebuild(void Function(LinkBuilder) updates) =>
@@ -293,8 +291,8 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
     try {
       _$result = _$v ??
           new _$Link._(
-              self: self.build(),
-              collection: collection.build(),
+              self: _self?.build(),
+              collection: _collection?.build(),
               about: _about?.build(),
               customer: _customer?.build(),
               up: _up?.build(),
@@ -303,9 +301,9 @@ class LinkBuilder implements Builder<Link, LinkBuilder> {
       String _$failedField;
       try {
         _$failedField = 'self';
-        self.build();
+        _self?.build();
         _$failedField = 'collection';
-        collection.build();
+        _collection?.build();
         _$failedField = 'about';
         _about?.build();
         _$failedField = 'customer';
